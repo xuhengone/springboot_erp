@@ -1,0 +1,47 @@
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/springboot_erp
+      username: root
+      password: 123456
+      max-active: 20
+      max-wait: 5000
+      initial-size: 1
+      filters: stat,log4j,wall
+      enable: true
+#监控页面配置
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        login-password: 123456
+        allow: 
+        deny: 
+        url-pattern: /druid/*
+#thymeleaf的配置
+  thymeleaf:
+    cache: false
+    enabled: true
+#mybatis的相关配置
+mybatis:
+  mapper-locations:
+  - classpath:mapper/*/*Mapper.xml    #加载mybatis映射配置文件
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl    #输出sql语句
+  type-aliases-package: cn.hp.system.domain     #配置别名
+#shiro的配置
+shiro: 
+  hash-algorithm-name: md5
+  hash-iterations: 2
+  login-url: /index.html
+  target-bean-name: shiroFilter
+  target-filter-lifecycle: true
+  unauthorized-url: /unauthorized.html
+  anon-urls:
+  - /login/login*
+  - /index.html*
+  - /login.html*
+  - /resources/**
+  authc-urls:
+  - /**
+
